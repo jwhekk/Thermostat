@@ -2,11 +2,11 @@
 
 function Thermostat () { //creating a class
 	this.MEDIUM_USAGE_LIMIT = 18;
-	this.DEFAULT_TEMP 			= 20;
-	this.temperature 	 			= this.DEFAULT_TEMP; //adding a property or the attribute of the class
-	this.MinimumTemp 	 			= 10;
-	this.powerSave   	 			= true;
-	this.maxTempSaveMode 		= 25;
+	this.DEFAULT_TEMP 		= 20;
+	this.temperature 	 	= this.DEFAULT_TEMP; //adding a property or the attribute of the class
+	this.MinimumTemp 	 	= 10;
+	this.powerSave   	 	= true;
+	this.maxTempSaveMode 	= 25;
 	this.maxTempSaveModeOff	= 32;
 }
 
