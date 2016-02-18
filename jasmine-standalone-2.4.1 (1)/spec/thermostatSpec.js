@@ -3,11 +3,11 @@
 describe('Thermostat', function(){
 
 	var thermostat;
-	
+
 	beforeEach(function(){
 		thermostat = new Thermostat();
 	});
-	
+
 	it('starts at 20 degrees', function(){
 		expect(thermostat.getCurrentTemperature()).toEqual(20);
 	});
@@ -16,7 +16,7 @@ describe('Thermostat', function(){
 		thermostat.upButton();
 		expect(thermostat.getCurrentTemperature()).toEqual(21);
 	});
-	
+
 	it('allows decrease of temperature using down button', function(){
 		thermostat.downButton();
 		expect(thermostat.getCurrentTemperature()).toEqual(19);
@@ -29,7 +29,7 @@ describe('Thermostat', function(){
 	it('it will not reduce temperature under 10º', function() {
 		for (var i=0; i<11; i++) {
 			thermostat.downButton();};
-			expect(thermostat.getCurrentTemperature()).toEqual(10);	
+			expect(thermostat.getCurrentTemperature()).toEqual(10);
 	});
 
 	it('power save is on by default', function(){
@@ -67,10 +67,22 @@ describe('Thermostat', function(){
 			expect(thermostat.getCurrentTemperature()).toEqual(20);
 	});
 
+	it('shows the high usage level', function() {
+    thermostat.powerSaveOff();
+		for (var i = 0; i<6; i++) {
+			thermostat.upButton();};
+		expect(thermostat.usageLevel()).toEqual("high-usage");
+	});
+
+	it('shows the medium usage level', function() {
+		expect(thermostat.usageLevel()).toEqual("medium-usage");
+	});
+
+	it('shows the low usage level', function() {
+    thermostat.powerSaveOff();
+		for (var i = 0; i<6; i++) {
+			thermostat.downButton();};
+		expect(thermostat.usageLevel()).toEqual("low-usage");
+	});
+
 });
-
-
-
-
-
-

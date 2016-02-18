@@ -1,6 +1,7 @@
 'use strict';
 
 function Thermostat () { //creating a class
+	this.MEDIUM_USAGE_LIMIT = 18;
 	this.DEFAULT_TEMP 			= 20;
 	this.temperature 	 			= this.DEFAULT_TEMP; //adding a property or the attribute of the class
 	this.MinimumTemp 	 			= 10;
@@ -21,7 +22,7 @@ Thermostat.prototype.upButton = function() {
  	if (this.ispowerSave() == false)
  		if	(this.temperature < this.maxTempSaveModeOff){
  			this.temperature +=1;
- 		}	
+ 		}
  	return;
 };
 
@@ -50,6 +51,16 @@ Thermostat.prototype.powerSaveOn = function() {
 
 Thermostat.prototype.resetTemp = function() {
 	this.temperature = this.DEFAULT_TEMP;
+};
+
+Thermostat.prototype.usageLevel = function() {
+	if (this.temperature > this.maxTempSaveMode) {
+		return "high-usage";
+	}
+	if (this.temperature < this.MEDIUM_USAGE_LIMIT) {
+		return "low-usage";
+	}
+	return "medium-usage";
 };
 
 
