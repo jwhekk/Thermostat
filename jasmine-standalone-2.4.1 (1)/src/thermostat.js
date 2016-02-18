@@ -1,8 +1,12 @@
 'use strict';
 
 function Thermostat () { //creating a class
-	this.temperature = 20; //adding a property or the attribute of the class
-	this.MinimumTemp = 10;
+	this.DEFAULT_TEMP 			= 20;
+	this.temperature 	 			= this.DEFAULT_TEMP; //adding a property or the attribute of the class
+	this.MinimumTemp 	 			= 10;
+	this.powerSave   	 			= true;
+	this.maxTempSaveMode 		= 25;
+	this.maxTempSaveModeOff	= 32;
 }
 
 Thermostat.prototype.getCurrentTemperature = function() { //ading a methd to a class
@@ -10,17 +14,45 @@ Thermostat.prototype.getCurrentTemperature = function() { //ading a methd to a c
 };
 
 Thermostat.prototype.upButton = function() {
- 	 this.temperature += 1;
+ 	if (this.ispowerSave ())
+ 		if (this.temperature < this.maxTempSaveMode){
+ 			this.temperature += 1;
+ 		}
+ 	if (this.ispowerSave() == false)
+ 		if	(this.temperature < this.maxTempSaveModeOff){
+ 			this.temperature +=1;
+ 		}	
+ 	return;
 };
 
 Thermostat.prototype.downButton = function() {
-	if(this.temperature > this.MinimumTemp){
-	this.temperature -= 1;}
+	if(this.isMinimumTemp()){
+	return;
+	}
+	this.temperature -= 1;
 };
 
 Thermostat.prototype.isMinimumTemp = function() {
-	return this.MinimumTemp;
+	return this.MinimumTemp === this.temperature;
 };
+
+Thermostat.prototype.ispowerSave = function() {
+	return this.powerSave === true;
+};
+
+Thermostat.prototype.powerSaveOff = function() {
+	this.powerSave = false;
+};
+
+Thermostat.prototype.powerSaveOn = function() {
+	this.powerSave = true;
+};
+
+Thermostat.prototype.resetTemp = function() {
+	this.temperature = this.DEFAULT_TEMP;
+};
+
+
 
 // Thermostat starts at 20 degrees
 // You can increase the temp with the up button

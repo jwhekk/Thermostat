@@ -23,7 +23,7 @@ describe('Thermostat', function(){
 	});
 
 	it('allows us to set a minimum temperature 10º', function() {
-		expect(thermostat.isMinimumTemp()).toEqual(10);
+		expect(thermostat.MinimumTemp).toEqual(10);
 	});
 
 	it('it will not reduce temperature under 10º', function() {
@@ -31,6 +31,46 @@ describe('Thermostat', function(){
 			thermostat.downButton();};
 			expect(thermostat.getCurrentTemperature()).toEqual(10);	
 	});
+
+	it('power save is on by default', function(){
+		expect(thermostat.ispowerSave()).toEqual(true);
+	});
+
+	it('power save can be turned off', function(){
+		thermostat.powerSaveOff();
+		expect(thermostat.ispowerSave()).toEqual(false);
+	});
+
+	it('power save can be turned on', function(){
+		thermostat.powerSaveOff();
+		thermostat.powerSaveOn();
+		expect(thermostat.ispowerSave()).toEqual(true);
+	});
+
+	it('has a max temperature 25 when power save is on', function(){
+		for (var i = 0; i<6; i++) {
+			thermostat.upButton();};
+		expect(thermostat.getCurrentTemperature()).toEqual(25);
+	});
+
+	it('has a max temperature 25 when power save is on', function(){
+		thermostat.powerSaveOff();
+		for (var i = 0; i<15; i++) {
+			thermostat.upButton();};
+		expect(thermostat.getCurrentTemperature()).toEqual(32);
+	});
+
+	it('can reset the temperature to default', function(){
+		for (var i = 0; i<6; i++) {
+			thermostat.upButton();};
+			thermostat.resetTemp();
+			expect(thermostat.getCurrentTemperature()).toEqual(20);
+	});
+
 });
+
+
+
+
 
 
